@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Recursos/puerta/puerta.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 56, 8 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "arriba"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 5.5, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -90.0, -90.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "abajo"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 5.5, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 90.0, 90.0, 0.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 55, 15 )
+
+[node name="puerta" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="puerta" type="ColorRect" parent="."]
+margin_right = 112.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 8 )
+
+[node name="staticBody2D" type="StaticBody2D" parent="puerta" groups=["puerta"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="puerta/staticBody2D" groups=["puerta"]]
+position = Vector2( 56, 8 )
+shape = SubResource( 1 )
+
+[node name="arriba" type="AnimationPlayer" parent="puerta"]
+anims/RESET = SubResource( 2 )
+anims/arriba = SubResource( 3 )
+
+[node name="abajo" type="AnimationPlayer" parent="puerta"]
+anims/RESET = SubResource( 4 )
+anims/abajo = SubResource( 5 )
+
+[node name="sensor1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sensor1"]
+position = Vector2( 55, -15 )
+shape = SubResource( 6 )
+
+[node name="sensor2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sensor2"]
+position = Vector2( 56, 30 )
+shape = SubResource( 6 )
+
+[connection signal="area_entered" from="sensor1" to="." method="_on_sensor1_area_entered"]
+[connection signal="area_exited" from="sensor1" to="." method="_on_sensor1_area_exited"]
+[connection signal="area_entered" from="sensor2" to="." method="_on_sensor2_area_entered"]
+[connection signal="area_exited" from="sensor2" to="." method="_on_sensor2_area_exited"]
