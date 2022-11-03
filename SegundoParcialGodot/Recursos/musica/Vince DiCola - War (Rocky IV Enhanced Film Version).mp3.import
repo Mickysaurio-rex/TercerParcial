@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Vince DiCola - War (Rocky IV Enhanced Film Version).mp3-4be6bc59b951407be1654a0ee03cbd4c.mp3str"
+
+[deps]
+
+source_file="res://Recursos/musica/Vince DiCola - War (Rocky IV Enhanced Film Version).mp3"
+dest_files=[ "res://.import/Vince DiCola - War (Rocky IV Enhanced Film Version).mp3-4be6bc59b951407be1654a0ee03cbd4c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
